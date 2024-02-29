@@ -13,7 +13,7 @@ var parserBase = [
 	'jacred.viewbox.dev',
 	'spawn.pp.ua:59118',
 	'spawn.pp.ua:59117',
-	'188.119.113.252:9117'
+	'192.168.1.99:9117'
 ]
 
 var parserName = [
