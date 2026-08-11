@@ -1,2 +1,1 @@
-# Lampa Plugin
-### **Files**
+
