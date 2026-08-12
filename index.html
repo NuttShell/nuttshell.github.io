@@ -10,7 +10,7 @@
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-<title>NuttShell</title>
+<title>nuttshell</title>
 <meta name="description" content="Tools by NuttShell — Python packaging, font tooling, and a Xiaomi cloud token extractor.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0C0C'/%3E%3Ctext x='7' y='23' font-family='monospace' font-size='18' fill='%2316C60C'%3E%3E%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
     --badge-bg:    #1A1808;
     --badge-line:  #3A3620;
 
-    --font: 'Cascadia Code', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-h1: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
@@ -167,98 +167,31 @@
     font-size:15px;
   }
 
-  /* ---------- terminal / listing ---------- */
-  .terminal{
+  /* ---------- repo list ---------- */
+  .repo-list{
+    list-style:none;
     margin:32px 0 8px;
-    border:1px solid var(--line);
-    border-radius:8px;
-    background:var(--bg-panel);
-    box-shadow:0 30px 60px -30px var(--shadow);
-    overflow:hidden;
+    padding:0;
   }
-  .terminal-titlebar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 8px 0 14px;
-    height:36px;
-    background:#111111;
-    border-bottom:1px solid var(--line);
-  }
-  .terminal-tab{
-    font-size:12.5px;
-    color:var(--fg-dim);
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  .terminal-tab::before{
-    content:"";
-    width:13px; height:13px;
-    background:var(--blue);
-    -webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M1.5 3l9 6-9 6v-2.4l5.6-3.6L1.5 5.4V3zM12 15h10.5v2H12z%22/%3E%3C/svg%3E') center/contain no-repeat;
-    mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M1.5 3l9 6-9 6v-2.4l5.6-3.6L1.5 5.4V3zM12 15h10.5v2H12z%22/%3E%3C/svg%3E') center/contain no-repeat;
-  }
-  .win-controls{
-    display:flex; align-items:center; gap:2px;
-    color:var(--fg-dim); font-size:11px;
-  }
-  .win-controls span{
-    width:28px; height:28px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:4px;
-  }
-  .win-controls span:last-child:hover{ background:#C50F1F; color:var(--fg-bright); }
-  .win-controls span:not(:last-child):hover{ background:#1E1E1E; color:var(--fg-bright); }
-
-  .terminal-body{ padding:18px 20px 20px; }
-
-  .dir-cmd{
-    font-size:14.5px;
-    margin-bottom:16px;
-  }
-  .dir-cmd .prompt{ color:var(--green); margin-right:10px; }
-  .dir-cmd .cmdtext{ color:var(--fg-bright); }
-
-  .listing{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13.5px;
-  }
-  .listing thead th{
-    text-align:left;
-    font-weight:400;
-    color:var(--fg-dim);
-    padding:0 14px 8px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .listing thead th:first-child{ padding-left:2px; }
-
-  .listing tbody tr{ transition:background .12s; }
-  .listing tbody tr:hover{ background:#111318; }
-
-  .listing td{
-    padding:11px 14px 11px 0;
+  .repo-item{
+    padding:18px 0;
     border-bottom:1px solid var(--line-soft);
-    vertical-align:top;
-    white-space:nowrap;
   }
-  .listing td:first-child{ padding-left:2px; }
-  .listing tbody tr:last-child td{ border-bottom:none; }
+  .repo-item:first-child{ padding-top:0; }
+  .repo-item:last-child{ border-bottom:none; }
 
-  .mode{ color:var(--fg-dim); }
-
-  .listing td.name-cell{ white-space:normal; }
-  .listing a.name-link{
+  .repo-name{
+    font-size:15.5px;
+    font-weight:700;
     color:var(--fg-bright);
-    font-weight:600;
   }
-  .listing tbody tr:hover a.name-link{ color:var(--cyan); text-decoration:underline; }
+  .repo-name:hover{ color:var(--cyan); text-decoration:underline; }
 
-  .desc{
+  .repo-desc{
+    margin:8px 0 0;
+    font-size:13.5px;
     color:var(--fg-dim);
-    white-space:normal;
-    max-width:1px; /* forces column to take remaining space via table layout */
+    max-width:62ch;
   }
 
   .badge{
@@ -272,20 +205,6 @@
     padding:1px 6px;
     vertical-align:middle;
     white-space:nowrap;
-  }
-
-  .cursor-line{
-    padding:14px 20px 18px;
-    font-size:14.5px;
-    border-top:1px dashed var(--line);
-  }
-  .cursor-line .prompt{ color:var(--green); margin-right:2px; }
-  .caret{
-    display:inline-block;
-    width:8px; height:1.05em;
-    background:var(--green);
-    transform:translateY(2px);
-    animation:blink 1s steps(1) infinite;
   }
 
   .note{
@@ -322,21 +241,13 @@
   }
 
   /* ---------- mobile ---------- */
-  @media (max-width:600px){
-    .listing thead{ display:none; }
-    .listing, .listing tbody, .listing tr, .listing td{ display:block; width:100%; }
-    .listing td{ white-space:normal; border-bottom:none; padding:2px 0; }
-    .listing tr{ padding:12px 0; border-bottom:1px solid var(--line-soft); }
-    .mode{ display:none; }
-    .desc{ padding-top:2px !important; }
-  }
 </style>
 </head>
 <body>
 
   <header class="site-header">
     <div class="wrap">
-      <div class="brand">NuttShell<span class="blink">_</span></div>
+      <div class="brand">nuttshell<span class="blink">_</span></div>
       <div class="header-right">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12M18.36 18.36l-2.12-2.12M7.76 7.76 5.64 5.64" stroke-linecap="round"/></svg>
@@ -353,66 +264,33 @@
   <main class="wrap">
     <section class="intro">
       <p class="eyebrow">tools &amp; scripts</p>
-      <h1>NuttShell</h1>
+      <h1>Tools</h1>
       <p class="lede">Small utilities that solve one problem each — Python packaging, font internals,
         and a Xiaomi cloud token grabber. Everything here is source-available on GitHub.</p>
     </section>
 
-    <div class="terminal">
-      <div class="terminal-titlebar">
-        <span class="terminal-tab">Windows PowerShell</span>
-        <div class="win-controls" aria-hidden="true">
-          <span>&#8212;</span><span>&#9633;</span><span>&#215;</span>
-        </div>
-      </div>
-      <div class="terminal-body">
-        <div class="dir-cmd">
-          <span class="prompt">PS C:\USERS\User&gt;</span><span class="cmdtext">dir</span>
-        </div>
-
-        <table class="listing">
-          <thead>
-            <tr>
-              <th>Mode</th>
-              <th>Name</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="mode">d----</td>
-              <td class="name-cell"><a class="name-link" href="https://nuttshell.github.io/localpython_installer/">localpython_installer/</a></td>
-              <td class="desc">Self-contained embeddable Python installer — console or GUI, no system install</td>
-            </tr>
-            <tr>
-              <td class="mode">d----</td>
-              <td class="name-cell"><a class="name-link" href="https://github.com/NuttShell/Xiaomi-cloud-tokens-extractor" target="_blank" rel="noopener">Xiaomi-cloud-tokens-extractor/</a></td>
-              <td class="desc">Retrieves Xiaomi cloud tokens and BLE encryption keys for every device on your account</td>
-            </tr>
-            <tr>
-              <td class="mode">d----</td>
-              <td class="name-cell"><a class="name-link" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Font-NameTable/</a><span class="badge">check visibility</span></td>
-              <td class="desc">Reads and rebuilds OpenType/TrueType name table records</td>
-            </tr>
-            <tr>
-              <td class="mode">d----</td>
-              <td class="name-cell"><a class="name-link" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener">VMetrixCFF/</a><span class="badge">check visibility</span></td>
-              <td class="desc">Vertical metrics fix for CFF fonts on Android</td>
-            </tr>
-            <tr>
-              <td class="mode">d----</td>
-              <td class="name-cell"><a class="name-link" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener">TTF2OTF/</a><span class="badge">check visibility</span></td>
-              <td class="desc">Converts TTF fonts to OTF</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cursor-line"><span class="prompt">PS C:\USERS\User&gt;</span><span class="caret"></span></div>
-    </div>
-
-    <p class="note">Rows marked <span class="badge" style="margin-left:0">check visibility</span> point to
-      repositories that didn't resolve publicly at the time this page was built — make them public under
-      <code>Settings → General → Danger Zone</code> if the links should work for visitors.</p>
+    <ul class="repo-list">
+      <li class="repo-item">
+        <a class="repo-name" href="https://nuttshell.github.io/localpython_installer/">Python embed installer</a>
+        <p class="repo-desc">Self-contained embeddable Python installer — console or GUI, no system install.</p>
+      </li>
+      <li class="repo-item">
+        <a class="repo-name" href="https://github.com/NuttShell/Xiaomi-cloud-tokens-extractor" target="_blank" rel="noopener">Xiaomi-cloud-tokens-extractor</a>
+        <p class="repo-desc">Retrieves Xiaomi cloud tokens and BLE encryption keys for every device on your account.</p>
+      </li>
+      <li class="repo-item">
+        <a class="repo-name" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Font-NameTable</a><span class="badge">check visibility</span>
+        <p class="repo-desc">Reads and rebuilds OpenType/TrueType name table records.</p>
+      </li>
+      <li class="repo-item">
+        <a class="repo-name" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener">CFF Font Vertical Metrics</a><span class="badge">check visibility</span>
+        <p class="repo-desc">Vertical metrics fix for CFF fonts on Android.</p>
+      </li>
+      <li class="repo-item">
+        <a class="repo-name" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener">TrueType 2 OpenType converter</a><span class="badge">check visibility</span>
+        <p class="repo-desc">Converts TTF fonts to OTF.</p>
+      </li>
+    </ul>
   </main>
 
   <footer class="site-footer">
