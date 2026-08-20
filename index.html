@@ -110,27 +110,43 @@
     gap:8px;
   }
   .lang-toggle{
-    display:flex;
-    align-items:stretch;
+    position:relative;
+    display:inline-flex;
+    padding:3px;
+    gap:2px;
     height:30px;
+    border-radius:8px;
+    background:var(--bg-page);
     border:1px solid var(--line);
-    border-radius:6px;
-    overflow:hidden;
   }
+  .lang-indicator{
+    position:absolute;
+    top:3px; bottom:3px; left:3px;
+    width:30px;
+    border-radius:6px;
+    background:var(--bg-panel);
+    box-shadow:0 1px 3px rgba(0,0,0,0.25);
+    transition:transform .2s cubic-bezier(.4,0,.2,1);
+    pointer-events:none;
+  }
+  :root[data-theme="light"] .lang-indicator{ box-shadow:0 1px 3px rgba(0,0,0,0.10); }
+  .lang-toggle[data-active="ru"] .lang-indicator{ transform:translateX(32px); }
   .lang-toggle button{
+    position:relative;
+    z-index:1;
+    width:30px;
     font-family:var(--font);
     font-size:11px;
     font-weight:700;
     letter-spacing:0.02em;
-    padding:0 10px;
     background:transparent;
     color:var(--fg-dim);
     border:none;
+    border-radius:6px;
     cursor:pointer;
-    transition:color .15s, background .15s;
+    transition:color .2s;
   }
-  .lang-toggle button + button{ border-left:1px solid var(--line); }
-  .lang-toggle button.active{ color:var(--fg-bright); background:var(--bg-panel); }
+  .lang-toggle button.active{ color:var(--fg-bright); }
   .lang-toggle button:hover{ color:var(--fg-bright); }
   .theme-toggle{
     display:flex; align-items:center; justify-content:center;
@@ -281,7 +297,8 @@
     <div class="wrap">
       <div class="brand">nuttshell.github.io<span class="blink">_</span></div>
       <div class="header-right">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" aria-label="Language" data-active="en">
+        <span class="lang-indicator" aria-hidden="true"></span>
         <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
         <button type="button" data-lang="ru" aria-pressed="false">RU</button>
       </div>
@@ -388,6 +405,9 @@
     document.querySelectorAll('[data-i18n-aria]').forEach(function(el){
       var key = el.getAttribute('data-i18n-aria');
       if (dict[key] != null) el.setAttribute('aria-label', dict[key]);
+    });
+    document.querySelectorAll('.lang-toggle').forEach(function(group){
+      group.setAttribute('data-active', lang);
     });
     document.querySelectorAll('.lang-toggle button').forEach(function(btn){
       var isActive = btn.getAttribute('data-lang') === lang;
