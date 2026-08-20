@@ -109,6 +109,29 @@
     align-items:center;
     gap:8px;
   }
+  .lang-toggle{
+    display:flex;
+    align-items:stretch;
+    height:30px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .lang-toggle button{
+    font-family:var(--font);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.02em;
+    padding:0 10px;
+    background:transparent;
+    color:var(--fg-dim);
+    border:none;
+    cursor:pointer;
+    transition:color .15s, background .15s;
+  }
+  .lang-toggle button + button{ border-left:1px solid var(--line); }
+  .lang-toggle button.active{ color:var(--fg-bright); background:var(--bg-panel); }
+  .lang-toggle button:hover{ color:var(--fg-bright); }
   .theme-toggle{
     display:flex; align-items:center; justify-content:center;
     width:30px; height:30px;
@@ -258,7 +281,11 @@
     <div class="wrap">
       <div class="brand">nuttshell.github.io<span class="blink">_</span></div>
       <div class="header-right">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" data-i18n-aria="themeToggleLabel" aria-label="Toggle light and dark theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.36 5.64l-2.12 2.12M7.76 16.24l-2.12 2.12M18.36 18.36l-2.12-2.12M7.76 7.76 5.64 5.64" stroke-linecap="round"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
       </button>
@@ -272,42 +299,114 @@
 
   <main class="wrap">
     <section class="intro">
-      <p class="eyebrow">tools &amp; scripts</p>
-      <h1>Tools</h1>
-      <p class="lede">Small utilities that solve one problem each — Python packaging, font internals,
+      <p class="eyebrow" data-i18n="eyebrow">tools &amp; scripts</p>
+      <h1 data-i18n="h1">Tools</h1>
+      <p class="lede" data-i18n="lede">Small utilities that solve one problem each — Python packaging, font internals,
         and a Xiaomi cloud token grabber. Everything here is source-available on GitHub.</p>
     </section>
 
     <ul class="repo-list">
       <li class="repo-item">
-        <a class="repo-name" href="https://nuttshell.github.io/localpython_installer/">Python embed installer</a>
-        <p class="repo-desc">Self-contained embeddable Python installer — console or GUI, no system install. <a class="repo-visit" href="https://github.com/NuttShell/localpython_installer" target="_blank" rel="noopener">Visit &gt;</a></p>
+        <a class="repo-name" href="https://nuttshell.github.io/localpython_installer/" data-i18n="repo1Name">Python embed installer</a>
+        <p class="repo-desc"><span data-i18n="repo1Desc">Self-contained embeddable Python installer — console or GUI, no system install.</span> <a class="repo-visit" data-i18n="visit" href="https://github.com/NuttShell/localpython_installer" target="_blank" rel="noopener">Visit &gt;</a></p>
       </li>
       <li class="repo-item">
         <a class="repo-name" href="https://github.com/NuttShell/Xiaomi-cloud-tokens-extractor" target="_blank" rel="noopener">Xiaomi-cloud-tokens-extractor</a>
-        <p class="repo-desc">Retrieves Xiaomi cloud tokens and BLE encryption keys for every device on your account. <a class="repo-visit" href="https://github.com/NuttShell/Xiaomi-cloud-tokens-extractor" target="_blank" rel="noopener">Visit &gt;</a></p>
+        <p class="repo-desc"><span data-i18n="repo2Desc">Retrieves Xiaomi cloud tokens and BLE encryption keys for every device on your account.</span> <a class="repo-visit" data-i18n="visit" href="https://github.com/NuttShell/Xiaomi-cloud-tokens-extractor" target="_blank" rel="noopener">Visit &gt;</a></p>
       </li>
       <li class="repo-item">
-        <a class="repo-name" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Font-NameTable</a><span class="badge">check visibility</span>
-        <p class="repo-desc">Reads and rebuilds OpenType/TrueType name table records. <a class="repo-visit" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Visit &gt;</a></p>
+        <a class="repo-name" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Font-NameTable</a><span class="badge" data-i18n="checkVis">check visibility</span>
+        <p class="repo-desc"><span data-i18n="repo3Desc">Reads and rebuilds OpenType/TrueType name table records.</span> <a class="repo-visit" data-i18n="visit" href="https://github.com/NuttShell/Font-NameTable" target="_blank" rel="noopener">Visit &gt;</a></p>
       </li>
       <li class="repo-item">
-        <a class="repo-name" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener">CFF Font Vertical Metrics</a><span class="badge">check visibility</span>
-        <p class="repo-desc">Vertical metrics fix for CFF fonts on Android. <a class="repo-visit" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener">Visit &gt;</a></p>
+        <a class="repo-name" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener" data-i18n="repo4Name">CFF Font Vertical Metrics</a><span class="badge" data-i18n="checkVis">check visibility</span>
+        <p class="repo-desc"><span data-i18n="repo4Desc">Vertical metrics fix for CFF fonts on Android.</span> <a class="repo-visit" data-i18n="visit" href="https://github.com/NuttShell/VMetrixCFF" target="_blank" rel="noopener">Visit &gt;</a></p>
       </li>
       <li class="repo-item">
-        <a class="repo-name" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener">TrueType 2 OpenType converter</a><span class="badge">check visibility</span>
-        <p class="repo-desc">Converts TTF fonts to OTF. <a class="repo-visit" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener">Visit &gt;</a></p>
+        <a class="repo-name" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener" data-i18n="repo5Name">TrueType 2 OpenType converter</a><span class="badge" data-i18n="checkVis">check visibility</span>
+        <p class="repo-desc"><span data-i18n="repo5Desc">Converts TTF fonts to OTF.</span> <a class="repo-visit" data-i18n="visit" href="https://github.com/NuttShell/TTF2OTF" target="_blank" rel="noopener">Visit &gt;</a></p>
       </li>
     </ul>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <div>Copyright © 2026 Max NuttShell</div>
+      <div data-i18n="footer">Copyright © 2026 Max NuttShell</div>
     </div>
   </footer>
 
+<script>
+(function(){
+  var I18N = {
+    en: {
+      title: "Tools by NuttShell",
+      themeToggleLabel: "Toggle light and dark theme",
+      eyebrow: "tools & scripts",
+      h1: "Tools",
+      lede: "Small utilities that solve one problem each — Python packaging, font internals, and a Xiaomi cloud token grabber. Everything here is source-available on GitHub.",
+      visit: "Visit >",
+      checkVis: "check visibility",
+      repo1Name: "Python embed installer",
+      repo1Desc: "Self-contained embeddable Python installer — console or GUI, no system install.",
+      repo2Desc: "Retrieves Xiaomi cloud tokens and BLE encryption keys for every device on your account.",
+      repo3Desc: "Reads and rebuilds OpenType/TrueType name table records.",
+      repo4Name: "CFF Font Vertical Metrics",
+      repo4Desc: "Vertical metrics fix for CFF fonts on Android.",
+      repo5Name: "TrueType 2 OpenType converter",
+      repo5Desc: "Converts TTF fonts to OTF.",
+      footer: "Copyright © 2026 Max NuttShell"
+    },
+    ru: {
+      title: "Инструменты — NuttShell",
+      themeToggleLabel: "Переключить светлую/тёмную тему",
+      eyebrow: "инструменты и скрипты",
+      h1: "Инструменты",
+      lede: "Небольшие утилиты, каждая решает одну задачу — упаковка Python, внутренности шрифтов и извлечение токенов Xiaomi cloud. Всё доступно на GitHub в виде исходного кода.",
+      visit: "Открыть >",
+      checkVis: "проверить доступность",
+      repo1Name: "Установщик embed-версии Python",
+      repo1Desc: "Автономный установщик embeddable-версии Python — консоль или GUI, без системной установки.",
+      repo2Desc: "Достаёт токены Xiaomi cloud и ключи шифрования BLE для всех устройств на аккаунте.",
+      repo3Desc: "Читает и пересобирает записи name table в OpenType/TrueType шрифтах.",
+      repo4Name: "Вертикальные метрики CFF-шрифтов",
+      repo4Desc: "Исправление вертикальных метрик CFF-шрифтов для Android.",
+      repo5Name: "Конвертер TrueType в OpenType",
+      repo5Desc: "Конвертирует TTF-шрифты в OTF.",
+      footer: "© 2026 Max NuttShell"
+    }
+  };
+
+  function applyLang(lang){
+    var dict = I18N[lang] || I18N.en;
+    document.documentElement.setAttribute('lang', lang);
+    if (dict.title) document.title = dict.title;
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-aria');
+      if (dict[key] != null) el.setAttribute('aria-label', dict[key]);
+    });
+    document.querySelectorAll('.lang-toggle button').forEach(function(btn){
+      var isActive = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    localStorage.setItem('nuttshell-lang', lang);
+  }
+
+  document.querySelectorAll('.lang-toggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      applyLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  applyLang(localStorage.getItem('nuttshell-lang') || 'en');
+})();
+</script>
 <script>
 (function(){
   var root = document.documentElement;
